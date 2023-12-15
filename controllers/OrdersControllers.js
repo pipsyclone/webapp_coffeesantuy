@@ -34,7 +34,7 @@ export const getByOrderId = async (req, res) => {
     }
 }
 
-export const removeAllOrders = async (req, res) {
+export const removeAllOrders = async (req, res) => {
     try {
         await Orders.destroy({ truncate: true })
         await OrdersDetails.destroy({ truncate: true })
