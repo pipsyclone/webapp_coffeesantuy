@@ -11,6 +11,15 @@ export const getAllUsers = async (req, res) => {
     }
 }
 
+export const getUsersById = async (req, res) => {
+    try {
+        const response = await Users.findOne({where: {userid: req.params.userid}})
+        res.json({status: 200, message: "OK!", data: response})
+    } catch (err) {
+        res.json({status: 500, message: err.message})
+    }
+}
+
 export const setUsers = async (req, res) => {
     try {
         const getEmail = await Users.findOne({where : { email: req.body.email }})
@@ -43,9 +52,9 @@ export const searchUsers = async (req, res) => {
         const searchOptions = {
             where: {
                 [Op.or]: [
-                    {userid: req.params.keyword},
-                    {name: req.params.keyword},
-                    {email: req.params.keyword}
+                    {userid   : { [Op.like]: `%${req.params.keyword}%` }},
+                    {username : { [Op.like]: `%${req.params.keyword}%` }},
+                    {email    : { [Op.like]: `%${req.params.keyword}%` }},
                 ]
             }
         }
