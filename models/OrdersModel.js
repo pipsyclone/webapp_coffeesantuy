@@ -4,7 +4,7 @@ import connection from "../config/database.js";
 const { DataTypes } = Sequelize
 
 const Orders = connection.define('orders', {
-    recent:             {type: DataTypes.INTEGER, autoIncrement: true}
+    recent:             {type: DataTypes.INTEGER, autoIncrement: true},
     orderid:            {type: DataTypes.STRING(13), primaryKey: true},
     name_customer:      DataTypes.STRING,
     contact_customer:   DataTypes.STRING,
